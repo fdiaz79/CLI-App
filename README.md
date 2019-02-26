@@ -1,3 +1,3 @@
 # CLI-App
 
-In progress
+Queries in Band in Town and Spotify APIs working.
