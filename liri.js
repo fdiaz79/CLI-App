@@ -50,26 +50,85 @@ function bandsInTownFunct(text) {
         console.log("Venue: " + venueName);
         console.log("Location: " + venueLocation);
         console.log("Date and time:" + date);
+    }).catch((error) => {
+        console.log(error);
     });    
 };
 
 function spotifyFunct(text) {
-    spotify.search({ type: 'track', query: text, limit:1 }).then((response) => {
-        var artistName = response.tracks.items[0].artists[0].name;
-        var albumName = response.tracks.items[0].album.name
-        var previewUrl = response.tracks.items[0].external_urls.spotify;
-        
-        console.log ("Song: " + text);
-        console.log("Artist/band: " + artistName);
-        console.log("From the album: " + albumName);
-        console.log("You can preview it at: " + previewUrl);       
-    }).catch((err) => {
-        console.log(err);
-    });
+    var song = "The Sign";
+    if (text){
+        song = text;
+        spotify.search({ type: 'track', query: song, limit:10 }).then((response) => {
+            var responseArr = response.tracks.items;
+
+            console.log("\nTop ten results for your " + song + " query:");
+            
+            responseArr.forEach( (element) => {
+                var songName = element.name;
+                var artistName = element.artists[0].name;
+                var albumName = element.album.name;
+                var previewUrl = element.external_urls.spotify;
+
+                console.log ("\nSong: " + songName);
+                console.log("Artist/band: " + artistName);
+                console.log("From the album: " + albumName);
+                console.log("You can preview it at: " + previewUrl);
+                console.log("----------------------------------------");
+            });        
+                
+        }).catch((err) => {
+            console.log(err);
+        });
+    } else{
+        spotify.request('https://api.spotify.com/v1/tracks/0hrBpAOgrt8RXigk83LLNE'). then((response) => {
+            var songName = response.name;
+            var artistName = response.artists[0].name;
+            var albumName = response.album.name;
+            var previewUrl = response.external_urls.spotify;
+
+            console.log ("\nSong: " + songName);
+            console.log("Artist/band: " + artistName);
+            console.log("From the album: " + albumName);
+            console.log("You can preview it at: " + previewUrl);
+            console.log("----------------------------------------");
+        });
+    }
 };
 
 function omdbFunct(text) {
-    console.log(text);
+    var title = "Mr. Nobody";
+    if(text){
+        title = text;
+    } else{
+        console.log("If you haven't watched 'Mr. Nobody,' then you should: http://www.imdb.com/title/tt0485947/");
+        console.log("It's on Netflix!");
+    };
+
+    var queryURL = "http://www.omdbapi.com/?apikey=trilogy&t="+title;
+    axios.get(queryURL).then((doc) => {
+        var response = doc.data;
+       
+        var movieTitle = response.Title;
+        var movieYear = response.Year;
+        var movieIMDB = response.Ratings[0].Value;
+        var movieTomatoes = response.Ratings[1].Value;
+        var movieCountry = response.Country;
+        var movieLanguage = response.Language;
+        var moviePlot = response.Plot;
+        var movieActors = response.Actors;
+        console.log("Title: ", movieTitle);
+        console.log("Year: ", movieYear);
+        console.log("IMDB Rating: ", movieIMDB);
+        console.log("Rotten Tomatoes Rating: ", movieTomatoes);
+        console.log("Country: ", movieCountry);
+        console.log("Language: ", movieLanguage);
+        console.log("Plot: ", moviePlot);
+        console.log("Actors: ", movieActors);
+    }).catch((error) => {
+        console.log(error);
+    });
+    
 };
 
 function fsFunct() {
