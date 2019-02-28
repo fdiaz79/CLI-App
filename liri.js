@@ -158,6 +158,7 @@ function fsFunct() {
     })   
 };
 
+
 function helpFunct(){
     console.log("List of acceptable commands:");
     console.log("node liri.js concert-this 'artist/band name here' ---> for information about your artists concert.");

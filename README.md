@@ -26,7 +26,7 @@ This will populate a list with the 10 top results with the title you searched. H
 
 ## YOUR FAVORITE MOVIE
 Type in your terminal
-_node liri.js movie-this **your song title**_
+_node liri.js movie-this **your movie name**_
 
 if you don't type in the MOVIE NAME, the result will default to Mr. Nobody. Take a look at the video of this function:
 
