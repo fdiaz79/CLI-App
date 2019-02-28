@@ -37,9 +37,10 @@ You can edit the file random.txt with any of the commands and run from the termi
 _node liri.js do-what-it-says_
 
 these are the options to type in the file, just type in one (and only one) of the following lines:
-_concert-this,"your band/artist name_
-_spotify-this-song,"your song title"_
-_movie-this,"your song title"_
+
+*_concert-this,"your band/artist name"_
+*_spotify-this-song,"your song title"_
+*_movie-this,"your song title"_
 
 You can even type in _do-what-it-says_ but it will result in an error message.
 
