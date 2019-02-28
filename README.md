@@ -29,6 +29,7 @@ Type in your terminal
 _node liri.js movie-this **your song title**_
 
 if you don't type in the MOVIE NAME, the result will default to Mr. Nobody. Take a look at the video of this function:
+
 [movie-this](https://drive.google.com/file/d/1-jySYsWr4MNhmC-h4_GNfXBID7Repct7/view?usp=sharing)
 
 ## EDIT A FILE AND EXECUTE FROM IT
@@ -43,5 +44,6 @@ _movie-this,"your song title"_
 You can even type in _do-what-it-says_ but it will result in an error message.
 
 To see this functionality in action, see the following video:
+
 [do-what-it-says](https://drive.google.com/file/d/1fEqJJ8647ytjVGKtsTj8V2fmaUgBpnjW/view?usp=sharing)
 
