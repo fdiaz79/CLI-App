@@ -38,7 +38,7 @@ _node liri.js do-what-it-says_
 
 these are the options to type in the file, just type in one (and only one) of the following lines:
 
-* _concert-this,"your band/artist name_
+* _concert-this,"your band/artist name"_
 
 * _spotify-this-song,"your song title"_
 
