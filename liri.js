@@ -6,41 +6,51 @@ var Spotify = require('node-spotify-api');
 var axios = require("axios");
 var moment = require("moment");
 
+var fs = require("fs");
+
 var spotify = new Spotify(keys.spotify);
 
 
 var input = process.argv;
 
-var instruction = input[2].trim();
-var searchParam = "";
+var operation = input[2].trim();
+var queryParam = "";
 
 for (var i = 3; i < input.length; i++) {
-    searchParam = searchParam + " " + input[i].trim();
+    queryParam = queryParam + " " + input[i].trim();
 };
-searchParam = searchParam.trim();
+queryParam = queryParam.trim();
 
-switch (instruction) {
-    case "concert-this":
-        bandsInTownFunct(searchParam);
-        break;
-    case "spotify-this-song":
-        spotifyFunct(searchParam);
-        break;
-    case "movie-this":
-        omdbFunct(searchParam);
-        break;
-    case "do-what-it-says":
-        fsFunct();
-        break;
-    case "?":
-        helpFunct();
-        break;
-    default:
-        console.log("'"+ instruction + " " + searchParam + "' is not a valid selection. Please type 'node liri.js ?' to see a list of acceptable commands");
-        break;        
+runProgram(operation, queryParam);
+
+
+
+function runProgram(instruction, searchParam) {
+
+    switch (instruction) {
+        case "concert-this":
+            bandsInTownFunct(searchParam);
+            break;
+        case "spotify-this-song":
+            spotifyFunct(searchParam);
+            break;
+        case "movie-this":
+            omdbFunct(searchParam);
+            break;
+        case "do-what-it-says":
+            fsFunct();
+            break;
+        case "?":
+            helpFunct();
+            break;
+        default:
+            console.log("'"+ instruction + " " + searchParam + "' is not a valid selection. Please type 'node liri.js ?' to see a list of acceptable commands");
+            break;        
+    };
 };
 
 function bandsInTownFunct(text) {
+    console.log(text);
     var queryURL = "https://rest.bandsintown.com/artists/" + text + "/events?app_id=codingbootcamp";
     axios.get(queryURL).then( (response) => {
         var venueName = response.data[0].venue.name;
@@ -132,7 +142,21 @@ function omdbFunct(text) {
 };
 
 function fsFunct() {
-    console.log("random text");
+    var textArr = [];
+    fs.readFile("random.txt", "utf8", function(error, data) {
+        if (error) {
+            return console.log(error);
+        }
+        textArr = data.split(",");
+        var param1 = textArr[0];
+        var param2 = textArr[1].slice(1,-1);
+
+        if (param1 === "do-what-it-says"){
+            return console.log("ERROR: The instrucion on random.txt is " + param1 + ". This will create an infinite loop, please modify the file.");
+        };
+        
+        runProgram(param1, param2);
+    })   
 };
 
 function helpFunct(){
