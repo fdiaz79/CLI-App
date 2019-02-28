@@ -50,7 +50,6 @@ function runProgram(instruction, searchParam) {
 };
 
 function bandsInTownFunct(text) {
-    console.log(text);
     var queryURL = "https://rest.bandsintown.com/artists/" + text + "/events?app_id=codingbootcamp";
     axios.get(queryURL).then( (response) => {
         var venueName = response.data[0].venue.name;
